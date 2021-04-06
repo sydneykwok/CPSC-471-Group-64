@@ -5,30 +5,27 @@ session_start();
 include("connection.php");
 include("functions.php");
 
-// check if the user has clicked on the post button
-// use SERVER as a check. if the request method is equal to POST
+// using SERVER, check if the user has clicked on the post button (if request method = POST)
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-	// then something was posted
-	// collect the data from the post variable (where the user data is going to be)
+	// something was posted, so collect the data from the post variable
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 
-	// if not empty (bc we don't want to register a user w/o checking if they've written something)
+	// if not empty (make sure they've entered some value)
 	if (!empty($email) && !is_numeric($email) && !empty($password)) {
 		// read from database
-		// only checking buyer for now but need to check seller too!!!!
-		// checking that the email provided by user is the same as any email in the db
-		$query = "select * from buyer where Email = '$email' limit 1";	// limit 1 to get only 1 result
-
+		// checking that the email provided by user is exists as an Email in the db
+		$query = "(select Password from buyer where Email = '$email') UNION ALL (select Password from seller where Email = '$email') UNION ALL (select Password from real_estate_agent where Email = '$email') limit 1";
 		$result = mysqli_query($conn, $query);
+
 		// check if result is good & we have atleast one result
 		if ($result && mysqli_num_rows($result) > 0) {
 			// get user data
 			$user_data = mysqli_fetch_assoc($result);
-			// check if user data's password is the same as user supplied password
+			// check if user data's password (from db) matches user supplied password
 			if ($user_data['Password'] == $password) {
 				// if true, assign session id
-				$_SESSION['Email'] = $user_data['Email'];
+				$_SESSION['Email'] = $email;
 				// then redirect to index page
 				header("Location: index.php");
 				die;
