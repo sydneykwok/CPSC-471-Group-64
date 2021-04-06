@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2021 at 06:24 PM
+-- Generation Time: Apr 06, 2021 at 11:47 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -41,7 +41,7 @@ CREATE TABLE `buyer` (
 --
 
 INSERT INTO `buyer` (`Email`, `First_Name`, `Last_Name`, `Password`, `Agent_ID`) VALUES
-('testemail', 'testfirst', 'testlast', 'test', NULL);
+('testb', 'testf', 'testl', 'buyer', NULL);
 
 -- --------------------------------------------------------
 
@@ -151,8 +151,16 @@ CREATE TABLE `real_estate_agent` (
   `Last_Name` varchar(50) NOT NULL,
   `Contact_No` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL,
   `Association` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `real_estate_agent`
+--
+
+INSERT INTO `real_estate_agent` (`Agent_ID`, `First_Name`, `Last_Name`, `Contact_No`, `Email`, `Password`, `Association`) VALUES
+(2, 'testf', 'testl', '8888888888', 'testa', 'agent', 'test');
 
 -- --------------------------------------------------------
 
@@ -177,8 +185,15 @@ CREATE TABLE `seller` (
   `First_Name` varchar(50) NOT NULL,
   `Last_Name` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
-  `Agent_ID` int(11) NOT NULL
+  `Agent_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `seller`
+--
+
+INSERT INTO `seller` (`Email`, `First_Name`, `Last_Name`, `Password`, `Agent_ID`) VALUES
+('tests', 'testf', 'testl', 'seller', NULL);
 
 -- --------------------------------------------------------
 
@@ -277,7 +292,8 @@ ALTER TABLE `property_image`
 --
 ALTER TABLE `real_estate_agent`
   ADD PRIMARY KEY (`Agent_ID`),
-  ADD UNIQUE KEY `Agent_ID` (`Agent_ID`);
+  ADD UNIQUE KEY `Agent_ID` (`Agent_ID`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `residential_property`
@@ -347,7 +363,7 @@ ALTER TABLE `property_image`
 -- AUTO_INCREMENT for table `real_estate_agent`
 --
 ALTER TABLE `real_estate_agent`
-  MODIFY `Agent_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Agent_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `residential_property`
