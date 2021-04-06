@@ -1,0 +1,28 @@
+body {
+    background: #eee;
+}
+
+#text {
+    height: 25px;
+    border-radius: 5px;
+    padding: 4px;
+    border: solid thin #aaa;
+    width: 100%;
+}
+
+#button{
+    padding: 10px;
+    width: 100px;
+    color: black;
+    background-color: lightblue;
+    border: none;
+}
+
+#box{
+    background-color: white;
+    border: solid gray 1px;
+    border-radius: 5px;
+    margin: 100px auto;
+    width: 20%;
+    padding: 50px;
+}
