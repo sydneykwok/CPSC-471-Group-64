@@ -17,13 +17,21 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Real Estate Database !!!</title>
+	<title>Home Page</title>
 </head>
 <body>
 	<a href="logout.php">Logout</a>
-	<h1>This is the index page.</h1>
+	<h1>Welcome to the Real Estates Home Page!</h1>
 
 	<br>
 	Hello, <?php echo $user_data['First_Name'];?>.
+
+	<br>
+	Select one of the following options to begin your property search.
+
+	<!-- Create a list of options to go to on the Home Page-->
+	<div>
+		<a href="searchProperty.php">Click to Search for Properties</a><br><br>
+	</div>
 </body>
 </html>
