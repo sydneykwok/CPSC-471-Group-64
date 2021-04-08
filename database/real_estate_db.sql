@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2021 at 11:47 PM
+-- Generation Time: Apr 08, 2021 at 04:04 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -128,6 +128,13 @@ CREATE TABLE `property` (
   `Agent_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `property`
+--
+
+INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
+(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 'testb', 'tests', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -173,6 +180,13 @@ CREATE TABLE `residential_property` (
   `Num_Beds` int(11) NOT NULL,
   `Num_Baths` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `residential_property`
+--
+
+INSERT INTO `residential_property` (`Property_ID`, `Num_Beds`, `Num_Baths`) VALUES
+(1, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -351,7 +365,7 @@ ALTER TABLE `online_meeting`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `property_image`
@@ -369,7 +383,7 @@ ALTER TABLE `real_estate_agent`
 -- AUTO_INCREMENT for table `residential_property`
 --
 ALTER TABLE `residential_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tour`
