@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2021 at 06:01 AM
+-- Generation Time: Apr 10, 2021 at 05:01 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -64,6 +64,13 @@ CREATE TABLE `commercial_property` (
   `Property_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `commercial_property`
+--
+
+INSERT INTO `commercial_property` (`Property_ID`) VALUES
+(3);
+
 -- --------------------------------------------------------
 
 --
@@ -82,6 +89,17 @@ CREATE TABLE `house_listing` (
   `Num_Beds` int(11) NOT NULL,
   `Num_Baths` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `house_listing`
+--
+
+INSERT INTO `house_listing` (`Listing_ID`, `Description`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Seller_Name`, `Price`, `Num_Beds`, `Num_Baths`) VALUES
+(1, '', '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 'Debora', 445000, 3, 3),
+(2, '', '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 'Alex', 349900, 2, 1),
+(3, '', '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 'Brian', 715000, 0, 2),
+(4, '', '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 'Justin', 410000, 3, 3),
+(5, '', '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 'Janet', 739900, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -134,7 +152,10 @@ CREATE TABLE `property` (
 
 INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
 (1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 'testb', 'tests', 2),
-(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 'testb', 'tests', 2);
+(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 'testb', 'tests', 2),
+(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 1, 715000, 0, 'testb', 'tests', 2),
+(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 1, 410000, 7250, 'testb', 'tests', 2),
+(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 1, 739900, 7250, 'testb', 'tests', 2);
 
 -- --------------------------------------------------------
 
@@ -187,7 +208,10 @@ CREATE TABLE `residential_property` (
 --
 
 INSERT INTO `residential_property` (`Property_ID`, `Num_Beds`, `Num_Baths`) VALUES
-(1, 3, 3);
+(1, 3, 3),
+(2, 2, 1),
+(4, 3, 3),
+(5, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -220,6 +244,15 @@ CREATE TABLE `structure_type` (
   `Listing_ID` int(11) NOT NULL,
   `Type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `structure_type`
+--
+
+INSERT INTO `structure_type` (`Listing_ID`, `Type`) VALUES
+(1, 'House'),
+(2, 'Townhouse'),
+(3, 'House');
 
 -- --------------------------------------------------------
 
@@ -348,13 +381,13 @@ ALTER TABLE `tour`
 -- AUTO_INCREMENT for table `commercial_property`
 --
 ALTER TABLE `commercial_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `house_listing`
 --
 ALTER TABLE `house_listing`
-  MODIFY `Listing_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Listing_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `online_meeting`
@@ -366,7 +399,7 @@ ALTER TABLE `online_meeting`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `property_image`
@@ -384,7 +417,7 @@ ALTER TABLE `real_estate_agent`
 -- AUTO_INCREMENT for table `residential_property`
 --
 ALTER TABLE `residential_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tour`
