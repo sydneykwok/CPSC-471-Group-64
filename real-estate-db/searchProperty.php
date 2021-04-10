@@ -2,7 +2,7 @@
 // on every page where you want to use the session (check if user is logged in), have to put session_start().
 session_start();
 
-    // include the files we need
+   // include the files we need
     include("connection.php");	// for use of $conn
     include("functions.php");	// for use of check_login()
 
@@ -11,7 +11,23 @@ session_start();
     $user_data = check_login($conn);	
 	// if user is not logged in, they will be redirected to login page
 	// if they are logged in, this user_data will contain their info. to access an attribute of the user: $user_data['attribute']
+    
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $prop_type = $_POST['property'];
+        $city = $_POST['city'];
 
+        $query = "(SELECT * FROM property WHERE City = '$city')";
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            //Print every row from filtered query
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "Address: " . $row['Address'] . "<br>";
+            }
+        } else {
+            echo "No houses found :(";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +39,13 @@ session_start();
 <body>
 	<form method="post">
 		<div id="mydiv">
-			<label id="searchLabel">Search many listings from trusted real estate agents</label>
+			<label id="searchLabel">Search many listings from trusted real estate agents</label> 
+			<br>
 		</div>
 
 		<div>
 			<label>Select a property type:</label>
-			<select name="beds">
+			<select name="property">
 				<option value="res">Residential</option>
 				<option value="com">Commercial</option>
 			</select>
@@ -83,7 +100,7 @@ session_start();
 		</div>
 			
 		<div>
-			<button>Search</button>
+			<input type="submit" name="submit" value="Search">
 		</div>
 
 		</form>

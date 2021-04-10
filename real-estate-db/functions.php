@@ -1,30 +1,29 @@
 <?php
 
-// check if a user is logged in
-// check whether session id (email) is set
+// check if there is a user logged in (i.e., whether email value is set for the session)
 function check_login($conn) {
     
-    // check if session value is set
-    // checking if inside session there is a user id
-    // if that user id exists...if this value is set
-    // reading..checking if session value exists
-    // checking if this value is set in the session
-    // if this value is unset, then we're logged out
+    // if the email value is set for the session...
     if (isset($_SESSION['Email'])) {
-        // check if it's really in our database
-        // if session value exists, check if it's real
+        // check that the email really exists in our database by creating a query:
         $email = $_SESSION['Email'];
-        // check in the database by creating a query: 
-        // only querying buyers right now...will need to UNION with seller later !!!!!!!!!!!!!11
-        $query = "select * from buyer where Email = '$email' limit 1";
-        
-        // now read from the db
+        // first check if user is an agent
+        $query = "select * from real_estate_agent where Email = '$email' limit 1";
         $result = mysqli_query($conn, $query);
+        if($result && mysqli_num_rows($result) > 0) {
+            // good to go. collect & return this user data. (note: assoc = associative array)
+            $user_data = mysqli_fetch_assoc($result);
+            // return the user's data
+            return $user_data;
+        }
+
+        // if not an agent, then check if they're a buyer/seller
+        $query = "(select * from buyer where Email = '$email') UNION ALL (select * from seller where Email = '$email') limit 1";
+        $result = mysqli_query($conn, $query);
+
         // check if the result is positive & num of rows of result > 0
         if($result && mysqli_num_rows($result) > 0) {
-            // if session value is real, return user's data. if it's not, redirect.
-            // good to go. collect this data we got.
-            // assoc = associative array. featch the associate array
+            // good to go. collect & return this user data. (note: assoc = associative array)
             $user_data = mysqli_fetch_assoc($result);
             // return the user's data
             return $user_data;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2021 at 06:24 PM
+-- Generation Time: Apr 08, 2021 at 06:01 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -41,7 +41,7 @@ CREATE TABLE `buyer` (
 --
 
 INSERT INTO `buyer` (`Email`, `First_Name`, `Last_Name`, `Password`, `Agent_ID`) VALUES
-('testemail', 'testfirst', 'testlast', 'test', NULL);
+('testb', 'testf', 'testl', 'buyer', NULL);
 
 -- --------------------------------------------------------
 
@@ -128,6 +128,14 @@ CREATE TABLE `property` (
   `Agent_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `property`
+--
+
+INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
+(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 'testb', 'tests', 2),
+(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 'testb', 'tests', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -151,8 +159,16 @@ CREATE TABLE `real_estate_agent` (
   `Last_Name` varchar(50) NOT NULL,
   `Contact_No` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL,
   `Association` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `real_estate_agent`
+--
+
+INSERT INTO `real_estate_agent` (`Agent_ID`, `First_Name`, `Last_Name`, `Contact_No`, `Email`, `Password`, `Association`) VALUES
+(2, 'testf', 'testl', '8888888888', 'testa', 'agent', 'test');
 
 -- --------------------------------------------------------
 
@@ -166,6 +182,13 @@ CREATE TABLE `residential_property` (
   `Num_Baths` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `residential_property`
+--
+
+INSERT INTO `residential_property` (`Property_ID`, `Num_Beds`, `Num_Baths`) VALUES
+(1, 3, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -177,8 +200,15 @@ CREATE TABLE `seller` (
   `First_Name` varchar(50) NOT NULL,
   `Last_Name` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
-  `Agent_ID` int(11) NOT NULL
+  `Agent_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `seller`
+--
+
+INSERT INTO `seller` (`Email`, `First_Name`, `Last_Name`, `Password`, `Agent_ID`) VALUES
+('tests', 'testf', 'testl', 'seller', NULL);
 
 -- --------------------------------------------------------
 
@@ -277,7 +307,8 @@ ALTER TABLE `property_image`
 --
 ALTER TABLE `real_estate_agent`
   ADD PRIMARY KEY (`Agent_ID`),
-  ADD UNIQUE KEY `Agent_ID` (`Agent_ID`);
+  ADD UNIQUE KEY `Agent_ID` (`Agent_ID`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `residential_property`
@@ -335,7 +366,7 @@ ALTER TABLE `online_meeting`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `property_image`
@@ -347,13 +378,13 @@ ALTER TABLE `property_image`
 -- AUTO_INCREMENT for table `real_estate_agent`
 --
 ALTER TABLE `real_estate_agent`
-  MODIFY `Agent_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Agent_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `residential_property`
 --
 ALTER TABLE `residential_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tour`
