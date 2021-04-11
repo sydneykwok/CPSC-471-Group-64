@@ -101,11 +101,14 @@ session_start();
 	Hello, <?php echo $user_data['First_Name'];?>.
 	
 	<br>
+	Our business hours are 9am-7pm for 7 days a week.
+	
 	Select one of the following options to begin your property search.
 
 	<!-- Create a list of options to go to on the Home Page-->
 	<div>
 		<a href="searchProperty.php">Click to Search for Properties</a><br><br>
+		<a href="bookMeeting.php">Click to Book a Meeting With a Real Estate Agent</a><br><br>
 	</div>
 </body>
 </html>
