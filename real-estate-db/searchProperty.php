@@ -19,11 +19,42 @@
 <head>
 	<title>Search Property</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<style>
+		.grad{
+			width: 100%;
+			height: 50px;
+			background-image: linear-gradient(to right, rgba(38,83,126,0.7), rgba(0,33,64,1));
+		}
+
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+		.logo{
+			color: #ffffff;
+			font-size: 25px;
+			text-align: left;
+			margin-top: 0px;
+			float: left;
+			margin: 0px;
+			line-height: 50px;
+			padding-left: 50px;
+		}
+	</style>
 </head>
+
+
 <body>
+	<div class="grad">
+		<h1 class="logo"> Logo </h1>
+	</div>
+
 	<form method="post">
-		<div id="mydiv">
-			<label id="searchLabel">Search many listings from trusted real estate agents</label> 
+		<div>
+			<h2><center>Search many listings from trusted real estate agents.</center></h2> 
 			<br>
 		</div>
 
@@ -138,7 +169,7 @@
 		</div>
 		
 		<div>
-			<label>Beds:</label>
+			<label>Bedrooms:</label>
 			<select name="beds">
 				<option value="Any">Any</option>
 				<option value="0">0</option>
@@ -152,7 +183,7 @@
 		</div>
 		
 		<div>
-			<label>Baths:</label>
+			<label>Bathrooms:</label>
 			<select name="baths">
 				<option value="Any">Any</option>
 				<option value="1">1</option>
@@ -255,10 +286,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -271,10 +322,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -287,10 +358,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -303,10 +394,31 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
+
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -319,10 +431,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -335,10 +467,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -351,10 +503,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -367,10 +539,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -383,10 +575,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -399,10 +611,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -415,10 +647,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -431,10 +683,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -447,10 +719,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+		
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -463,10 +755,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
-			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+			while ($row = mysqli_fetch_assoc($res_filtered)) { 
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -479,10 +791,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
-			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+			while ($row = mysqli_fetch_assoc($res_filtered)) { 
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -495,10 +827,30 @@
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
-			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+			while ($row = mysqli_fetch_assoc($res_filtered)) { 
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/house.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -514,10 +866,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -531,10 +903,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -548,10 +940,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -564,10 +976,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -580,10 +1012,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -596,10 +1048,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -612,10 +1084,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -628,10 +1120,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -644,10 +1156,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -660,10 +1192,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -676,10 +1228,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -692,10 +1264,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+		
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -708,10 +1300,31 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+		
+		<div class ="row">
+
+		<?php
+
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -724,10 +1337,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+		
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -740,10 +1373,30 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+		
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
@@ -756,19 +1409,106 @@
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
+		?>
+		
+		<div class ="row">
+
+		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
-			}
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		?>
+			<div class ="column">
+				<div class="card">
+					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<h2> <?php echo $row['Address'];?> </h2>
+					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
+					<p>Description.</p>
+					<p><button>More Details</button></p>
+				</div>
+			</div>
+		<?php } ?>
+
+		</div>
+
+		<?php
 		}
 		else {
 			echo 'Unfortunately, we do not have your dream house. :(';
 		}
 	}
 
-	//If something goes wrong...
+	//If something goes wrong... Use this when testing
 	else {
-		echo 'Error';
+		//echo 'Error';
 	}
 
 ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		/* Float four columns side by side */
+		.column {
+		  float: left;
+		  width: 25%;
+		  padding: 0 20px;
+		}
+
+		/* Remove extra left and right margins, due to padding in columns */
+		.row {margin: 0 -5px;}
+
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+
+		/* Style cards */
+		.card {
+		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		  max-width: 380px;
+		  margin: auto;
+		  text-align: center;
+		}
+
+		.price {
+		  color: #696969;
+		  font-size: 22px;
+		}
+
+		.card button {
+		  border: none;
+		  outline: 0;
+		  padding: 12px;
+		  color: white;
+		  background-color: #000;
+		  text-align: center;
+		  cursor: pointer;
+		  width: 100%;
+		  font-size: 18px;
+		}
+
+		.card button:hover {
+		  opacity: 0.7;
+		}
+
+		/* Responsive columns - one column layout (vertical) on small screens */
+		@media screen and (max-width: 600px) {
+		  .column {
+			width: 100%;
+			display: block;
+			margin-bottom: 20px;
+		  }
+		}
+	</style>
+</head>
+</html>
