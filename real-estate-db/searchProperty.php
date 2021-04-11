@@ -821,7 +821,6 @@
 		}
 	}
 
-	
 	//16. User chooses residential, does not set city, does not set max price,  does not set $ of bedrooms, does not set # of bathrooms 
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
 		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price')";
@@ -857,7 +856,8 @@
 			echo 'Unfortunately, we do not have your dream house. :(';
 		}
 	}
-	
+
+
 	/* --------------------------------------------------------------------------------------For commercial properties:---------------------------------------------------------------------------*/
 
 	//1. User chooses commercial, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
@@ -1439,7 +1439,7 @@
 		}
 	}
 
-	//If something goes wrong...
+	//If something goes wrong... Use this when testing
 	else {
 		//echo 'Error';
 	}
