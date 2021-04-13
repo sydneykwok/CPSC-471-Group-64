@@ -98,7 +98,7 @@ session_start();
 	<h1>Welcome to the Real Estates Home Page!</h1>
 
 	<br>
-	Hello, <?php echo $user_data['First_Name'];?>.
+	Hello, <?php echo $_SESSION['Account_Type'] . " " . $user_data['First_Name'];?>.
 	
 	<br>
 	Our business hours are 9am-7pm for 7 days a week.
@@ -108,7 +108,14 @@ session_start();
 	<!-- Create a list of options to go to on the Home Page-->
 	<div>
 		<a href="searchProperty.php">Click to Search for Properties</a><br><br>
-		<a href="bookMeeting.php">Click to Book a Meeting With a Real Estate Agent</a><br><br>
+		<?php
+			// depending on account type, get the options
+			if ($_SESSION['Account_Type']=="buyer") { ?>
+				<a href="bookMeeting.php">Click to Book a Meeting With a Real Estate Agent</a><br><br>
+			<?php } 
+			if ($_SESSION['Account_Type']=="buyer" || $_SESSION['Account_Type']=="agent") { ?>
+				<a href="viewMeetings.php">Click to View Your Meetings</a><br><br>
+			<?php } ?>
 	</div>
 </body>
 </html>
