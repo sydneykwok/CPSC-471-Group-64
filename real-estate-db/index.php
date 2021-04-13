@@ -109,12 +109,18 @@ session_start();
 	<div>
 		<a href="searchProperty.php">Click to Search for Properties</a><br><br>
 		<?php
-			// depending on account type, get the options
+			// depending on account type, get the options for the home page
+			// if buyer account, allow booking for a meeting 
 			if ($_SESSION['Account_Type']=="buyer") { ?>
 				<a href="bookMeeting.php">Click to Book a Meeting With a Real Estate Agent</a><br><br>
-			<?php } 
+			<?php }
+			// if buyer or agent account, allow for view meeting 
 			if ($_SESSION['Account_Type']=="buyer" || $_SESSION['Account_Type']=="agent") { ?>
 				<a href="viewMeetings.php">Click to View Your Meetings</a><br><br>
+			<?php }
+			// if seller account, allow for selling of property 
+			if ($_SESSION['Account_Type']=="seller") { ?>
+				<a href="addProperty.php">Click to Sell a Property</a><br><br>
 			<?php } ?>
 	</div>
 </body>
