@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 	// if not empty (make sure they've entered some value)
 	if (!empty($email) && !is_numeric($email) && !empty($password)) {
-		// read from database
-		// checking that the email provided by user is exists as an Email in the db
-		$query = "(select Password from buyer where Email = '$email') UNION ALL (select Password from seller where Email = '$email') UNION ALL (select Password from real_estate_agent where Email = '$email') limit 1";
+		
+		// check if user is buyer
+		$query = "(select Password from buyer where Email = '$email') limit 1";
 		$result = mysqli_query($conn, $query);
 
 		// check if result is good & we have atleast one result
@@ -26,6 +26,46 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			if ($user_data['Password'] == $password) {
 				// if true, assign session id
 				$_SESSION['Email'] = $email;
+				// and account type
+				$_SESSION['Account_Type'] = "buyer";
+				// then redirect to index page
+				header("Location: index.php");
+				die;
+			}
+		}
+
+		// check if user is seller
+		$query = "(select Password from seller where Email = '$email') limit 1";
+		$result = mysqli_query($conn, $query);
+
+		if ($result && mysqli_num_rows($result) > 0) {
+			// get user data
+			$user_data = mysqli_fetch_assoc($result);
+			// check if user data's password (from db) matches user supplied password
+			if ($user_data['Password'] == $password) {
+				// if true, assign session id
+				$_SESSION['Email'] = $email;
+				// and account type
+				$_SESSION['Account_Type'] = "seller";
+				// then redirect to index page
+				header("Location: index.php");
+				die;
+			}
+		}
+
+		// check if user is agent
+		$query = "(select Password from real_estate_agent where Email = '$email') limit 1";
+		$result = mysqli_query($conn, $query);
+
+		if ($result && mysqli_num_rows($result) > 0) {
+			// get user data
+			$user_data = mysqli_fetch_assoc($result);
+			// check if user data's password (from db) matches user supplied password
+			if ($user_data['Password'] == $password) {
+				// if true, assign session id
+				$_SESSION['Email'] = $email;
+				// and account type
+				$_SESSION['Account_Type'] = "agent";
 				// then redirect to index page
 				header("Location: index.php");
 				die;
