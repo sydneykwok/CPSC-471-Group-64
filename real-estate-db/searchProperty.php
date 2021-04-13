@@ -12,6 +12,14 @@
 	// if user is not logged in, they will be redirected to login page
 	// if they are logged in, this user_data will contain their info. to access an attribute of the user: $user_data['attribute']
     
+	if (isset($_POST['view'])) {
+		//set session variables for the property that was clicked
+		$_SESSION['Property_Type'] = substr($_POST['view'],0,3);
+		$_SESSION['Property_ID'] = substr($_POST['view'],3);
+		// then redirect to viewProperty page
+		header("Location: viewProperty.php");
+		die;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -202,9 +210,7 @@
 		</form>
 		<br>
 	</div>
-</body>
-</html>
-
+	<form method="post" action="">
 <?php
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -302,7 +308,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -338,7 +344,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -374,7 +380,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -411,7 +417,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -447,7 +453,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -483,7 +489,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -519,7 +525,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -555,7 +561,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -591,7 +597,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -627,7 +633,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -663,7 +669,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -699,7 +705,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -735,7 +741,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -771,7 +777,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -807,7 +813,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -843,7 +849,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -882,7 +888,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -919,7 +925,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -956,7 +962,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -992,7 +998,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1028,7 +1034,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1064,7 +1070,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1100,7 +1106,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1136,7 +1142,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1172,7 +1178,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1208,7 +1214,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1244,7 +1250,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1280,7 +1286,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1317,7 +1323,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1353,7 +1359,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1389,7 +1395,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1425,7 +1431,7 @@
 					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
-					<p><button>More Details</button></p>
+					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
 				</div>
 			</div>
 		<?php } ?>
@@ -1445,6 +1451,9 @@
 	}
 
 ?>
+	</form>
+	</body>
+</html>
 
 
 <!DOCTYPE html>
