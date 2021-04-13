@@ -33,8 +33,8 @@ session_start();
                         if (!empty($zip)) {
                             if (!empty($status)) {
                                 if (!empty($value)) {
-                                    if (!empty($footage))
-                                        if (!empty(b_email)) {
+                                    if (!empty($footage)) {
+                                        if (!empty($b_email)) {
                                             // add the property details to the property relation 
                                             $query = "insert into property (Property_ID, Address, Neighbourhood, City, Zip_Code, Status, Estimated_Value, Square_Footage, B_Email, S_Email, Agent_ID) values ('$property', '$address', '$neighbourhood', '$city', '$zip', '$status', '$value', '$footage', '$b_email', '$s_email', '$agent')";
                                             mysqli_query($conn, $query);
@@ -56,7 +56,7 @@ session_start();
                             else {
                                 echo "Please enter a purchase status for the property you would like to sell.";
                             }
-                        else {
+                        } else {
                             echo "Please enter a ZIP code for the property you would like to sell.";
                         }
                     }
