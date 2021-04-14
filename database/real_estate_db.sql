@@ -142,6 +142,8 @@ CREATE TABLE `property` (
   `Status` tinyint(1) NOT NULL,
   `Estimated_Value` int(11) NOT NULL,
   `Square_Footage` int(11) NOT NULL,
+  `Num_Beds` int(11) NOT NULL,
+  `Num_Baths` int(11) NOT NULL,
   `B_Email` varchar(50) NOT NULL,
   `S_Email` varchar(50) NOT NULL,
   `Agent_ID` int(11) NOT NULL
@@ -151,12 +153,12 @@ CREATE TABLE `property` (
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
-(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 'testb', 'tests', 2),
-(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 'testb', 'tests', 2),
-(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 1, 715000, 0, 'testb', 'tests', 2),
-(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 1, 410000, 7250, 'testb', 'tests', 2),
-(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 1, 739900, 7250, 'testb', 'tests', 2);
+INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `Num_Beds`, `Num_Baths`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
+(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 3, 3, 'testb', 'tests', 2),
+(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 2, 1, 'testb', 'tests', 2),
+(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 1, 715000, 0, 0, 2, 'testb', 'tests', 2),
+(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 1, 410000, 7250, 3, 3, 'testb', 'tests', 2),
+(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 1, 739900, 7250, 4, 4, 'testb', 'tests', 2);
 
 -- --------------------------------------------------------
 
@@ -200,20 +202,18 @@ INSERT INTO `real_estate_agent` (`Agent_ID`, `First_Name`, `Last_Name`, `Contact
 --
 
 CREATE TABLE `residential_property` (
-  `Property_ID` int(11) NOT NULL,
-  `Num_Beds` int(11) NOT NULL,
-  `Num_Baths` int(11) NOT NULL
+  `Property_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `residential_property`
 --
 
-INSERT INTO `residential_property` (`Property_ID`, `Num_Beds`, `Num_Baths`) VALUES
-(1, 3, 3),
-(2, 2, 1),
-(4, 3, 3),
-(5, 4, 4);
+INSERT INTO `residential_property` (`Property_ID`) VALUES
+(1),
+(2),
+(4),
+(5);
 
 -- --------------------------------------------------------
 
