@@ -8,26 +8,6 @@
 
     $prop_id = $_SESSION['Property_ID'];
 
-    // get property info
-    $query = "SELECT * FROM property WHERE Property_ID = '$prop_id' limit 1";
-    $result = mysqli_query($conn, $query);
-    if ($result && mysqli_num_rows($result)>0) {
-        $prop_data = mysqli_fetch_assoc($result);
-        if ($_SESSION['Property_Type'] == "com") {
-            echo "Property Type: Commercial</br>";
-        } else {
-            echo "Property Type: Residential</br>";
-        }
-        echo "Property ID: " . $prop_data['Property_ID'] . "</br>";
-        echo "Address: " . $prop_data['Address'] . "</br>";
-        echo "Neighbourhood: " . $prop_data['Neighbourhood'] . "</br>";
-        echo "City: " . $prop_data['City'] . "</br>";
-        echo "Zip Code: " . $prop_data['Zip_Code'] . "</br>";
-        echo "Estimated Value: " . $prop_data['Estimated_Value'] . "</br>";
-        echo "Square Footage: " . $prop_data['Square_Footage'] . "</br>";
-    } else {
-        echo "There was an error retrieving the property info.";
-    }
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +59,8 @@
 </body>
 </html>
 
-<?php
+<?php 
+
     // get property info
     $query = "SELECT * FROM property WHERE Property_ID = '$prop_id' limit 1";
     $result = mysqli_query($conn, $query);
@@ -101,5 +82,16 @@
         echo "There was an error retrieving the property info.";
     }
 
+	$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+	$images = mysqli_query($conn, $img_query);
 
+	if (mysqli_num_rows($images) > 0) {
+	?>
+		<div class="gallery"> 
+			<?php while($row = mysqli_fetch_assoc($images)) { ?> 
+				<img src="images/<?php echo $row['Image_ID']; ?>.jfif" /> 
+				<br>
+			<?php } ?> 
+		</div> 
+	<?php } 
 ?>

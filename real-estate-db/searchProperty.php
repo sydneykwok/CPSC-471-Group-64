@@ -827,6 +827,7 @@
 		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price')";
 		$res_filtered = mysqli_query($conn, $query);
 
+
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
 
@@ -836,6 +837,7 @@
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) { 
 				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+		
 		?>
 			<div class ="column">
 				<div class="card">
