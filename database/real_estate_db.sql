@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2021 at 01:53 AM
+-- Generation Time: Apr 14, 2021 at 04:05 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -85,6 +85,16 @@ CREATE TABLE `online_meeting` (
   `B_Email` varchar(50) NOT NULL,
   `Message` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `online_meeting`
+--
+
+INSERT INTO `online_meeting` (`Meeting_ID`, `Agent_ID`, `Date`, `Time`, `B_Email`, `Message`) VALUES
+(36, 2, '2021-04-15', '12:00:00', 'testb', ''),
+(37, 1, '2021-04-28', '15:00:00', 'testb', ''),
+(39, 2, '2021-04-14', '13:00:00', 'testb', ''),
+(45, 2, '2021-04-23', '17:00:00', 'testb', '');
 
 -- --------------------------------------------------------
 
@@ -336,7 +346,8 @@ ALTER TABLE `structure_type`
 ALTER TABLE `tour`
   ADD PRIMARY KEY (`Tour_ID`),
   ADD UNIQUE KEY `Tour_ID` (`Tour_ID`),
-  ADD KEY `Tour_Agent_ID_FK` (`Agent_ID`);
+  ADD KEY `Tour_Agent_ID_FK` (`Agent_ID`),
+  ADD KEY `Tour_Property_ID_FK` (`Property_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -352,13 +363,13 @@ ALTER TABLE `commercial_property`
 -- AUTO_INCREMENT for table `online_meeting`
 --
 ALTER TABLE `online_meeting`
-  MODIFY `Meeting_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `Meeting_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `property_image`
@@ -376,13 +387,13 @@ ALTER TABLE `real_estate_agent`
 -- AUTO_INCREMENT for table `residential_property`
 --
 ALTER TABLE `residential_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tour`
 --
 ALTER TABLE `tour`
-  MODIFY `Tour_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Tour_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -456,7 +467,8 @@ ALTER TABLE `structure_type`
 -- Constraints for table `tour`
 --
 ALTER TABLE `tour`
-  ADD CONSTRAINT `Tour_Agent_ID_FK` FOREIGN KEY (`Agent_ID`) REFERENCES `real_estate_agent` (`Agent_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Tour_Agent_ID_FK` FOREIGN KEY (`Agent_ID`) REFERENCES `real_estate_agent` (`Agent_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Tour_Property_ID_FK` FOREIGN KEY (`Property_ID`) REFERENCES `property` (`Property_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
