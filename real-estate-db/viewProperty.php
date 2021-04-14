@@ -96,3 +96,17 @@
     </form>
 </body>
 </html>
+
+<?php
+    $img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+	$images = mysqli_query($conn, $img_query);
+
+	if (mysqli_num_rows($images) > 0) {
+	?>
+		<div class="gallery"> 
+			<?php while($row = mysqli_fetch_assoc($images)) { ?> 
+				<img src="images/<?php echo $row['Image_ID']; ?>.jfif" /> <br><br>
+			<?php } ?> 
+		</div> 
+	<?php } 
+?>
