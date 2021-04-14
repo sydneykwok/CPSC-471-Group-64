@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2021 at 04:05 AM
+-- Generation Time: Apr 14, 2021 at 04:24 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -46,13 +46,13 @@ INSERT INTO `buyer` (`Email`, `First_Name`, `Last_Name`, `Password`, `Agent_ID`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buyer_searches_listing`
+-- Table structure for table `buyer_bookmarks_property`
 --
 
-CREATE TABLE `buyer_searches_listing` (
-  `Email` varchar(50) NOT NULL,
-  `Listing_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `buyer_bookmarks_property` (
+  `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Property_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -261,12 +261,12 @@ ALTER TABLE `buyer`
   ADD KEY `Buyer_Agent_ID_FK` (`Agent_ID`);
 
 --
--- Indexes for table `buyer_searches_listing`
+-- Indexes for table `buyer_bookmarks_property`
 --
-ALTER TABLE `buyer_searches_listing`
-  ADD PRIMARY KEY (`Email`,`Listing_ID`),
-  ADD UNIQUE KEY `Email` (`Email`,`Listing_ID`),
-  ADD UNIQUE KEY `Email_2` (`Email`,`Listing_ID`);
+ALTER TABLE `buyer_bookmarks_property`
+  ADD PRIMARY KEY (`Email`,`Property_ID`),
+  ADD UNIQUE KEY `Email` (`Email`,`Property_ID`),
+  ADD KEY `Buyer_Bookmark_Property_ID_FK` (`Property_ID`);
 
 --
 -- Indexes for table `commercial_property`
@@ -406,10 +406,11 @@ ALTER TABLE `buyer`
   ADD CONSTRAINT `Buyer_Agent_ID_FK` FOREIGN KEY (`Agent_ID`) REFERENCES `real_estate_agent` (`Agent_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `buyer_searches_listing`
+-- Constraints for table `buyer_bookmarks_property`
 --
-ALTER TABLE `buyer_searches_listing`
-  ADD CONSTRAINT `B_Search_L_Email_FK` FOREIGN KEY (`Email`) REFERENCES `buyer` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `buyer_bookmarks_property`
+  ADD CONSTRAINT `Buyer_Bookmark_Email_FK` FOREIGN KEY (`Email`) REFERENCES `buyer` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Buyer_Bookmark_Property_ID_FK` FOREIGN KEY (`Property_ID`) REFERENCES `property` (`Property_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `commercial_property`
