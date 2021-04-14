@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2021 at 05:01 AM
+-- Generation Time: Apr 12, 2021 at 02:47 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -109,10 +109,11 @@ INSERT INTO `house_listing` (`Listing_ID`, `Description`, `Address`, `Neighbourh
 
 CREATE TABLE `online_meeting` (
   `Meeting_ID` int(11) NOT NULL,
-  `Agent_Name` varchar(100) NOT NULL,
+  `Agent_ID` int(11) NOT NULL,
   `Date` date NOT NULL,
   `Time` time NOT NULL,
-  `B_Email` varchar(50) NOT NULL
+  `B_Email` varchar(50) NOT NULL,
+  `Message` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -141,6 +142,8 @@ CREATE TABLE `property` (
   `Status` tinyint(1) NOT NULL,
   `Estimated_Value` int(11) NOT NULL,
   `Square_Footage` int(11) NOT NULL,
+  `Num_Beds` int(11) NOT NULL,
+  `Num_Baths` int(11) NOT NULL,
   `B_Email` varchar(50) NOT NULL,
   `S_Email` varchar(50) NOT NULL,
   `Agent_ID` int(11) NOT NULL
@@ -150,12 +153,12 @@ CREATE TABLE `property` (
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
-(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 'testb', 'tests', 2),
-(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 'testb', 'tests', 2),
-(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 1, 715000, 0, 'testb', 'tests', 2),
-(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 1, 410000, 7250, 'testb', 'tests', 2),
-(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 1, 739900, 7250, 'testb', 'tests', 2);
+INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `Num_Beds`, `Num_Baths`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
+(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 3, 3, 'testb', 'tests', 2),
+(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 2, 1, 'testb', 'tests', 2),
+(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 1, 715000, 0, 0, 2, 'testb', 'tests', 2),
+(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 1, 410000, 7250, 3, 3, 'testb', 'tests', 2),
+(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 1, 739900, 7250, 4, 4, 'testb', 'tests', 2);
 
 -- --------------------------------------------------------
 
@@ -189,6 +192,7 @@ CREATE TABLE `real_estate_agent` (
 --
 
 INSERT INTO `real_estate_agent` (`Agent_ID`, `First_Name`, `Last_Name`, `Contact_No`, `Email`, `Password`, `Association`) VALUES
+(1, 'AgentF', 'AgentL', '1111111111', 'agent@agent.com', 'agent', 'Agent Association'),
 (2, 'testf', 'testl', '8888888888', 'testa', 'agent', 'test');
 
 -- --------------------------------------------------------
@@ -198,20 +202,18 @@ INSERT INTO `real_estate_agent` (`Agent_ID`, `First_Name`, `Last_Name`, `Contact
 --
 
 CREATE TABLE `residential_property` (
-  `Property_ID` int(11) NOT NULL,
-  `Num_Beds` int(11) NOT NULL,
-  `Num_Baths` int(11) NOT NULL
+  `Property_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `residential_property`
 --
 
-INSERT INTO `residential_property` (`Property_ID`, `Num_Beds`, `Num_Baths`) VALUES
-(1, 3, 3),
-(2, 2, 1),
-(4, 3, 3),
-(5, 4, 4);
+INSERT INTO `residential_property` (`Property_ID`) VALUES
+(1),
+(2),
+(4),
+(5);
 
 -- --------------------------------------------------------
 
@@ -263,7 +265,6 @@ INSERT INTO `structure_type` (`Listing_ID`, `Type`) VALUES
 CREATE TABLE `tour` (
   `Tour_ID` int(11) NOT NULL,
   `Property_ID` int(11) NOT NULL,
-  `Duration` int(11) NOT NULL,
   `Agent_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -307,7 +308,8 @@ ALTER TABLE `house_listing`
 ALTER TABLE `online_meeting`
   ADD PRIMARY KEY (`Meeting_ID`),
   ADD UNIQUE KEY `Meeting_ID` (`Meeting_ID`),
-  ADD KEY `Online_Meeting_B_Email_FK` (`B_Email`);
+  ADD KEY `Online_Meeting_B_Email_FK` (`B_Email`),
+  ADD KEY `Online_Meeting_Agent_ID_FK` (`Agent_ID`);
 
 --
 -- Indexes for table `online_meeting_has_tour`
@@ -393,7 +395,7 @@ ALTER TABLE `house_listing`
 -- AUTO_INCREMENT for table `online_meeting`
 --
 ALTER TABLE `online_meeting`
-  MODIFY `Meeting_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Meeting_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `property`
@@ -423,7 +425,7 @@ ALTER TABLE `residential_property`
 -- AUTO_INCREMENT for table `tour`
 --
 ALTER TABLE `tour`
-  MODIFY `Tour_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Tour_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -452,6 +454,7 @@ ALTER TABLE `commercial_property`
 -- Constraints for table `online_meeting`
 --
 ALTER TABLE `online_meeting`
+  ADD CONSTRAINT `Online_Meeting_Agent_ID_FK` FOREIGN KEY (`Agent_ID`) REFERENCES `real_estate_agent` (`Agent_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `Online_Meeting_B_Email_FK` FOREIGN KEY (`B_Email`) REFERENCES `buyer` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
