@@ -28,6 +28,17 @@
     } else {
         echo "There was an error retrieving the property info.";
     }
+
+    // if "bookmark" button is pressed
+    if (isset($_POST['bookmark'])) {
+        
+        $email = $user_data['Email'];
+
+        $query = "insert into buyer_bookmarks_property (Email,Property_ID) values ('$email', '$prop_id')";
+        mysqli_query($conn, $query);
+
+        echo "Bookmarked!";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -76,5 +87,12 @@
     <div>
 		<h2><center>Property <?php echo $prop_id ?></center></h2> 
 	</div>
+
+    <form method="post" action="">
+    <?php
+        if ($_SESSION['Account_Type']=="buyer") { ?>
+            <input type="submit" name="bookmark" value="Bookmark This Property">        
+        <?php } ?>
+    </form>
 </body>
 </html>

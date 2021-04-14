@@ -117,6 +117,7 @@ session_start();
 			// if buyer or agent account, allow for view meeting 
 			if ($_SESSION['Account_Type']=="buyer" || $_SESSION['Account_Type']=="agent") { ?>
 				<a href="viewMeetings.php">Click to View Your Meetings</a><br><br>
+				<a href="bookmarks.php">Click to View The Properties You've Bookmarked</a><br><br>
 			<?php }
 			// if seller account, allow for selling of property 
 			if ($_SESSION['Account_Type']=="seller") { ?>
