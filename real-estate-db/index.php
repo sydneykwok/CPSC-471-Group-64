@@ -121,6 +121,11 @@ session_start();
 			// if seller account, allow for selling of property 
 			if ($_SESSION['Account_Type']=="seller") { ?>
 				<a href="addProperty.php">Click to Sell a Property</a><br><br>
+				<a href="viewSellerListings.php">Click to View Your Listings</a><br><br>
+			<?php } 
+			// if agent account, allow marking properties as sold (property has been bought) 
+			if ($_SESSION['Account_Type']=="agent") { ?>
+				<a href="sellProperty.php">Click to Mark Properties As Sold</a><br><br>
 			<?php } ?>
 	</div>
 </body>
