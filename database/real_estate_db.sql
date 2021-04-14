@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2021 at 04:24 PM
+-- Generation Time: Apr 14, 2021 at 08:55 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -119,26 +119,23 @@ CREATE TABLE `property` (
   `Neighbourhood` varchar(50) NOT NULL,
   `City` varchar(50) NOT NULL,
   `Zip_Code` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Status` tinyint(1) NOT NULL,
   `Estimated_Value` int(11) NOT NULL,
   `Square_Footage` int(11) NOT NULL,
   `Num_Beds` int(11) NOT NULL,
   `Num_Baths` int(11) NOT NULL,
-  `B_Email` varchar(50) NOT NULL,
-  `S_Email` varchar(50) NOT NULL,
-  `Agent_ID` int(11) NOT NULL
+  `S_Email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Status`, `Estimated_Value`, `Square_Footage`, `Num_Beds`, `Num_Baths`, `B_Email`, `S_Email`, `Agent_ID`) VALUES
-(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 1, 445000, 7250, 3, 3, 'testb', 'tests', 2),
-(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 1, 349900, 4050, 2, 1, 'testb', 'tests', 2),
-(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 1, 715000, 0, 0, 2, 'testb', 'tests', 2),
-(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 1, 410000, 7250, 3, 3, 'testb', 'tests', 2),
-(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 1, 739900, 7250, 4, 4, 'testb', 'tests', 2);
+INSERT INTO `property` (`Property_ID`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Estimated_Value`, `Square_Footage`, `Num_Beds`, `Num_Baths`, `S_Email`) VALUES
+(1, '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 445000, 7250, 3, 3, 'tests'),
+(2, '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 349900, 4050, 2, 1, 'tests'),
+(3, '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 715000, 0, 0, 2, 'tests'),
+(4, '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 410000, 7250, 3, 3, 'tests'),
+(5, '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 739900, 7250, 4, 4, 'tests');
 
 -- --------------------------------------------------------
 
@@ -298,9 +295,7 @@ ALTER TABLE `online_meeting_has_tour`
 ALTER TABLE `property`
   ADD PRIMARY KEY (`Property_ID`),
   ADD UNIQUE KEY `Property_ID` (`Property_ID`),
-  ADD KEY `Property_B_Email_FK` (`B_Email`),
-  ADD KEY `Property_S_Email_FK` (`S_Email`),
-  ADD KEY `Property_Agent_ID_FK` (`Agent_ID`);
+  ADD KEY `Property_S_Email_FK` (`S_Email`);
 
 --
 -- Indexes for table `property_image`
@@ -354,12 +349,6 @@ ALTER TABLE `tour`
 --
 
 --
--- AUTO_INCREMENT for table `commercial_property`
---
-ALTER TABLE `commercial_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `online_meeting`
 --
 ALTER TABLE `online_meeting`
@@ -369,7 +358,7 @@ ALTER TABLE `online_meeting`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `property_image`
@@ -382,12 +371,6 @@ ALTER TABLE `property_image`
 --
 ALTER TABLE `real_estate_agent`
   MODIFY `Agent_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `residential_property`
---
-ALTER TABLE `residential_property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tour`
@@ -436,8 +419,6 @@ ALTER TABLE `online_meeting_has_tour`
 -- Constraints for table `property`
 --
 ALTER TABLE `property`
-  ADD CONSTRAINT `Property_Agent_ID_FK` FOREIGN KEY (`Agent_ID`) REFERENCES `real_estate_agent` (`Agent_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `Property_B_Email_FK` FOREIGN KEY (`B_Email`) REFERENCES `buyer` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `Property_S_Email_FK` FOREIGN KEY (`S_Email`) REFERENCES `seller` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
