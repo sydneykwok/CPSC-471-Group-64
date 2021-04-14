@@ -298,7 +298,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -334,7 +345,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -370,7 +392,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -407,7 +440,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -443,7 +487,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -479,7 +534,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -515,7 +581,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -551,7 +628,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -587,7 +675,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -623,7 +722,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -659,7 +769,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -695,7 +816,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -731,7 +863,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -767,7 +910,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -803,7 +957,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -839,7 +1004,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -878,7 +1054,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -915,7 +1102,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -952,7 +1150,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -988,7 +1197,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1024,7 +1244,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1060,7 +1291,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1096,7 +1338,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1132,7 +1385,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+				<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1168,7 +1432,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1204,7 +1479,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1240,7 +1526,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1276,7 +1573,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1313,7 +1621,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1349,7 +1668,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1385,7 +1715,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1421,7 +1762,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
