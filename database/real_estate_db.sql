@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 12, 2021 at 02:47 AM
+-- Generation Time: Apr 14, 2021 at 01:53 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -70,36 +70,6 @@ CREATE TABLE `commercial_property` (
 
 INSERT INTO `commercial_property` (`Property_ID`) VALUES
 (3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `house_listing`
---
-
-CREATE TABLE `house_listing` (
-  `Listing_ID` int(11) NOT NULL,
-  `Description` varchar(250) NOT NULL,
-  `Address` varchar(50) NOT NULL,
-  `Neighbourhood` varchar(50) NOT NULL,
-  `City` varchar(50) NOT NULL,
-  `Zip_Code` varchar(32) NOT NULL,
-  `Seller_Name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `Price` int(11) NOT NULL,
-  `Num_Beds` int(11) NOT NULL,
-  `Num_Baths` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `house_listing`
---
-
-INSERT INTO `house_listing` (`Listing_ID`, `Description`, `Address`, `Neighbourhood`, `City`, `Zip_Code`, `Seller_Name`, `Price`, `Num_Beds`, `Num_Baths`) VALUES
-(1, '', '220 Hawkwood Boulevard NW', 'Hawkwood', 'Calgary', 'T3G3E8', 'Debora', 445000, 3, 3),
-(2, '', '23 Applecrest Court SE', 'Applewood Park', 'Calgary', 'T2A7N8', 'Alex', 349900, 2, 1),
-(3, '', '5, 1922 9 Avenue SE', 'Inglewood', 'Calgary', 'T2G0V2', 'Brian', 715000, 0, 2),
-(4, '', '101 Woodglen Place', 'Woodglen', 'Okotoks', 'T1S1L2', 'Justin', 410000, 3, 3),
-(5, '', '411 Panatella Square NW', 'Panorama Hills', 'Calgary', 'T3K0T7', 'Janet', 739900, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -243,7 +213,7 @@ INSERT INTO `seller` (`Email`, `First_Name`, `Last_Name`, `Password`, `Agent_ID`
 --
 
 CREATE TABLE `structure_type` (
-  `Listing_ID` int(11) NOT NULL,
+  `Property_ID` int(11) NOT NULL,
   `Type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -251,7 +221,7 @@ CREATE TABLE `structure_type` (
 -- Dumping data for table `structure_type`
 --
 
-INSERT INTO `structure_type` (`Listing_ID`, `Type`) VALUES
+INSERT INTO `structure_type` (`Property_ID`, `Type`) VALUES
 (1, 'House'),
 (2, 'Townhouse'),
 (3, 'House');
@@ -286,7 +256,7 @@ ALTER TABLE `buyer`
 ALTER TABLE `buyer_searches_listing`
   ADD PRIMARY KEY (`Email`,`Listing_ID`),
   ADD UNIQUE KEY `Email` (`Email`,`Listing_ID`),
-  ADD KEY `B_Search_L_Listing_ID_FK` (`Listing_ID`);
+  ADD UNIQUE KEY `Email_2` (`Email`,`Listing_ID`);
 
 --
 -- Indexes for table `commercial_property`
@@ -294,13 +264,6 @@ ALTER TABLE `buyer_searches_listing`
 ALTER TABLE `commercial_property`
   ADD PRIMARY KEY (`Property_ID`),
   ADD UNIQUE KEY `Property_ID` (`Property_ID`);
-
---
--- Indexes for table `house_listing`
---
-ALTER TABLE `house_listing`
-  ADD PRIMARY KEY (`Listing_ID`),
-  ADD UNIQUE KEY `Listing_ID` (`Listing_ID`);
 
 --
 -- Indexes for table `online_meeting`
@@ -364,8 +327,8 @@ ALTER TABLE `seller`
 -- Indexes for table `structure_type`
 --
 ALTER TABLE `structure_type`
-  ADD PRIMARY KEY (`Listing_ID`,`Type`),
-  ADD UNIQUE KEY `Listing_ID` (`Listing_ID`);
+  ADD PRIMARY KEY (`Property_ID`,`Type`),
+  ADD UNIQUE KEY `Listing_ID` (`Property_ID`);
 
 --
 -- Indexes for table `tour`
@@ -384,12 +347,6 @@ ALTER TABLE `tour`
 --
 ALTER TABLE `commercial_property`
   MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `house_listing`
---
-ALTER TABLE `house_listing`
-  MODIFY `Listing_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `online_meeting`
@@ -441,8 +398,7 @@ ALTER TABLE `buyer`
 -- Constraints for table `buyer_searches_listing`
 --
 ALTER TABLE `buyer_searches_listing`
-  ADD CONSTRAINT `B_Search_L_Email_FK` FOREIGN KEY (`Email`) REFERENCES `buyer` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `B_Search_L_Listing_ID_FK` FOREIGN KEY (`Listing_ID`) REFERENCES `house_listing` (`Listing_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `B_Search_L_Email_FK` FOREIGN KEY (`Email`) REFERENCES `buyer` (`Email`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `commercial_property`
@@ -494,7 +450,7 @@ ALTER TABLE `seller`
 -- Constraints for table `structure_type`
 --
 ALTER TABLE `structure_type`
-  ADD CONSTRAINT `Structure_Type_Listing_ID_FK` FOREIGN KEY (`Listing_ID`) REFERENCES `house_listing` (`Listing_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Structure_Type_Property_ID_FK` FOREIGN KEY (`Property_ID`) REFERENCES `property` (`Property_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `tour`
