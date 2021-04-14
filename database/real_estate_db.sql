@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2021 at 08:55 PM
+-- Generation Time: Apr 14, 2021 at 09:10 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -147,6 +147,14 @@ CREATE TABLE `property_image` (
   `Image_ID` int(11) NOT NULL,
   `Property_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `property_image`
+--
+
+INSERT INTO `property_image` (`Image_ID`, `Property_ID`) VALUES
+(1, 1),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +372,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT for table `property_image`
 --
 ALTER TABLE `property_image`
-  MODIFY `Image_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Image_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `real_estate_agent`
