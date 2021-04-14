@@ -75,11 +75,6 @@
 		</div>
 
 		<div>
-			<label>Country:</label> 
-			<input type="text" name="country" placeholder="Enter country name"/>
-		</div>
-
-		<div>
 			<label>City:</label> 
 			<input type="text" name="city" placeholder="Enter city name"/>
 		</div>
@@ -288,7 +283,7 @@
 
 	//1. User chooses residential, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
 	if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -299,13 +294,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -324,7 +319,7 @@
 
 	//2. User chooses residential, sets city, sets max price, sets # of bedrooms, does not set # of bathrooms	
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -335,13 +330,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -360,7 +355,7 @@
 
 	//3. User chooses residential, sets city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -371,13 +366,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -396,7 +391,7 @@
 
 	//4. User chooses residential, sets city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -408,13 +403,13 @@
 
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -433,7 +428,7 @@
 
 	//5. User chooses residential, sets city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -444,13 +439,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -469,7 +464,7 @@
 
 	//6. User chooses residential, sets city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -480,13 +475,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -505,7 +500,7 @@
 
 	//7. User chooses residential, sets city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -516,13 +511,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -541,7 +536,7 @@
 
 	//8. User chooses residential, sets city, does not set max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -552,13 +547,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -577,7 +572,7 @@
 
 	//9. User chooses residential, does not set city, sets max price, sets # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -588,13 +583,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -613,7 +608,7 @@
 
 	//10. User chooses residential, does not set city, sets max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -624,13 +619,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -649,7 +644,7 @@
 
 	//11. User chooses residential, does not set city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -660,13 +655,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -685,7 +680,7 @@
 
 	//12. User chooses residential, does not set city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -696,13 +691,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -721,7 +716,7 @@
 
 	//13. User chooses residential, does not set city, sets max price, does not set $ of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -732,13 +727,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -757,7 +752,7 @@
 
 	//14. User chooses residential, does not set city, does not set max price, does not set $ of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -768,13 +763,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) { 
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -793,7 +788,7 @@
 
 	//15. User chooses residential, does not set city, does not set max price, sets $ of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -804,13 +799,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) { 
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -829,7 +824,7 @@
 
 	//16. User chooses residential, does not set city, does not set max price,  does not set $ of bedrooms, does not set # of bathrooms 
 	else if ($res_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r JOIN `house_listing` AS h ON r.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price')";
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price')";
 		$res_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
@@ -840,13 +835,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($res_filtered)) { 
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/house.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "res" . $row['Property_ID'];?>">More Details</button></p>
@@ -868,7 +863,7 @@
 
 	//1. User chooses commercial, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -879,13 +874,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -905,7 +900,7 @@
 	
 	//2. User chooses commercial, sets city, sets max price, sets # of bedrooms, does not set # of bathrooms	
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -916,13 +911,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -942,7 +937,7 @@
 	
 	//3. User chooses commercial, sets city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -953,13 +948,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -978,7 +973,7 @@
 	
 	//4. User chooses commercial, sets city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Price <= '$max_price')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -989,13 +984,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1014,7 +1009,7 @@
 	
 	//5. User chooses commercial, sets city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1025,13 +1020,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1050,7 +1045,7 @@
 	
 	//6. User chooses commercial, sets city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1061,13 +1056,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1086,7 +1081,7 @@
 	
 	//7. User chooses commercial, sets city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1097,13 +1092,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1122,7 +1117,7 @@
 	
 	//8. User chooses commercial, sets city, does not set max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.City = '$city' and h.Price >= '$min_price')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1133,13 +1128,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1158,7 +1153,7 @@
 	
 	//9. User chooses commercial, does not set city, sets max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1169,13 +1164,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1194,7 +1189,7 @@
 	
 	//10. User chooses commercial, does not set city, sets max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1205,13 +1200,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1230,7 +1225,7 @@
 	
 	//11. User chooses commercial, does not set city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1241,13 +1236,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1266,7 +1261,7 @@
 	
 	//12. User chooses commercial, does not set city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Num_Beds = '$beds' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1277,13 +1272,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1300,9 +1295,9 @@
 		}
 	}
 	
-	//13. User chooses commercial, does not set city, sets max price, does not set $ of bedrooms, does not set # of bathrooms
+	//13. User chooses commercial, does not set city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Price <= '$max_price')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1314,13 +1309,13 @@
 
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1337,9 +1332,9 @@
 		}
 	}
 	
-	//14. User chooses commercial, does not set city, does not set max price, does not set $ of bedrooms, sets # of bathrooms
+	//14. User chooses commercial, does not set city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Num_Baths = '$baths')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1350,13 +1345,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1373,9 +1368,9 @@
 		}
 	}
 	
-	//15. User chooses commercial, does not set city, does not set max price, sets $ of bedrooms, does not set # of bathrooms
+	//15. User chooses commercial, does not set city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price' and h.Num_Beds = '$beds')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1386,13 +1381,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
@@ -1411,7 +1406,7 @@
 	
 	//16. User chooses commercial, does not set city, does not set max price,  does not set $ of bedrooms, does not set # of bathrooms 
 	else if ($com_Flag == True && $city_Flag == False && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c JOIN `house_listing` AS h ON c.Property_ID = h.Listing_ID WHERE h.Price >= '$min_price')";
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.Estimated_Value >= '$min_price')";
 		$com_filtered = mysqli_query($conn, $query);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
@@ -1422,13 +1417,13 @@
 		<?php
 			//Print every row from filtered query
 			while ($row = mysqli_fetch_assoc($com_filtered)) {
-				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Price'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
+				//echo "Property ID: " . $row['Property_ID'] . " Address: " . $row['Address'] . " City: " . $row['City'] . " Price: " . $row['Estimated_Value'] . " Beds: " . $row['Num_Beds'] . " Baths: " . $row['Num_Baths'] . "<br>";
 		?>
 			<div class ="column">
 				<div class="card">
 					<img src="images/commercial.jpg" alt="House" style="width:100%">
 					<h2> <?php echo $row['Address'];?> </h2>
-					<p class="price"> <?php echo "$" . $row['Price'];?> </p>
+					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
 					<p>Description.</p>
 					<p><button type="submit" name="view" value="<?php echo "com" . $row['Property_ID'];?>">More Details</button></p>
