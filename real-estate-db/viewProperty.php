@@ -78,28 +78,3 @@
 	</div>
 </body>
 </html>
-
-<?php
-    // get property info
-    $query = "SELECT * FROM property WHERE Property_ID = '$prop_id' limit 1";
-    $result = mysqli_query($conn, $query);
-    if ($result && mysqli_num_rows($result)>0) {
-        $prop_data = mysqli_fetch_assoc($result);
-        if ($_SESSION['Property_Type'] == "com") {
-            echo "Property Type: Commercial</br>";
-        } else {
-            echo "Property Type: Residential</br>";
-        }
-        echo "Property ID: " . $prop_data['Property_ID'] . "</br>";
-        echo "Address: " . $prop_data['Address'] . "</br>";
-        echo "Neighbourhood: " . $prop_data['Neighbourhood'] . "</br>";
-        echo "City: " . $prop_data['City'] . "</br>";
-        echo "Zip Code: " . $prop_data['Zip_Code'] . "</br>";
-        echo "Estimated Value: " . $prop_data['Estimated_Value'] . "</br>";
-        echo "Square Footage: " . $prop_data['Square_Footage'] . "</br>";
-    } else {
-        echo "There was an error retrieving the property info.";
-    }
-
-
-?>
