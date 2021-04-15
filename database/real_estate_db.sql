@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2021 at 09:31 PM
+-- Generation Time: Apr 15, 2021 at 02:28 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -366,13 +366,13 @@ ALTER TABLE `online_meeting`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Property_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `property_image`
 --
 ALTER TABLE `property_image`
-  MODIFY `Image_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Image_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `real_estate_agent`

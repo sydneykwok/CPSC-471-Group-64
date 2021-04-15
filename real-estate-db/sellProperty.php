@@ -102,7 +102,7 @@
     <div>
 		<h2><center>Mark Property As Sold</center></h2> 
 	</div>
-    <form method="post" action="" >
+    <form method="post" action="">
 <?php
     // get all the properties in the database
     $query = "select * from property";
@@ -112,7 +112,7 @@
     if ($result) {
         // and that we have atleast one result
         if (mysqli_num_rows($result) > 0) {
-            // display each meeting
+            // display each property
             while($listing_data = mysqli_fetch_assoc($result)){ ?>
                 <div class="meeting_div">
                     Property ID: <?php echo $listing_data['Property_ID'];?></br></br>
@@ -127,5 +127,6 @@
         echo "There was an error loading the properties.";
     }
 ?>
+    </form>
 </body>
 </html>

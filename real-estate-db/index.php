@@ -127,6 +127,7 @@ session_start();
 			// if agent account, allow marking properties as sold (property has been bought) 
 			if ($_SESSION['Account_Type']=="agent") { ?>
 				<a href="sellProperty.php">Click to Mark Properties As Sold</a><br><br>
+				<a href="uploadImage.php">Click to Upload Property Image</a><br><br>
 			<?php } ?>
 	</div>
 </body>
