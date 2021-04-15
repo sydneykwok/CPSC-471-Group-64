@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 15, 2021 at 02:23 AM
+-- Generation Time: Apr 15, 2021 at 02:28 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -154,8 +154,7 @@ CREATE TABLE `property_image` (
 
 INSERT INTO `property_image` (`Image_ID`, `Property_ID`) VALUES
 (1, 1),
-(2, 1),
-(25, 2);
+(2, 1);
 
 -- --------------------------------------------------------
 
