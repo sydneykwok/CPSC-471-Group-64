@@ -25,8 +25,10 @@ session_start();
     if (!empty($date)) {
       if (!empty($tour)) {
         // add the meeting to the online_meeting relation
-        $query = "insert into online_meeting (Agent_ID, Date, Time, B_Email, Message) values ('$agent', '$date', '$time', '$b_email', '$message')";
-        mysqli_query($conn, $query);
+        $query = "insert into online_meeting (Agent_ID, Date, Time, B_Email, Message) values ('$agent', '$date', '$time', '$b_email', ?)";
+        $stmt = mysqli_prepare($conn, $query);
+			  mysqli_stmt_bind_param($stmt, "s", $message);
+			  mysqli_stmt_execute($stmt);
         // get the meeting id of the meeting that was just created in the db
         $meeting_id = mysqli_insert_id($conn);
 

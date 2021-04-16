@@ -31,8 +31,11 @@ session_start();
                   if (!empty($num_beds)) {
                     if (!empty($num_baths)) {
                       // add the property details to the property relation 
-                      $query = "insert into property (Address, Neighbourhood, City, Zip_Code, Estimated_Value, Square_Footage, Num_Beds, Num_Baths, S_Email) values ('$address', '$neighbourhood', '$city', '$zip', '$value', '$footage', '$num_beds', '$num_baths', '$s_email')";
-                      mysqli_query($conn, $query);
+                      //$query = "insert into property (Address, Neighbourhood, City, Zip_Code, Estimated_Value, Square_Footage, Num_Beds, Num_Baths, S_Email) values ('$address', '$neighbourhood', '$city', '$zip', '$value', '$footage', '$num_beds', '$num_baths', '$s_email')";
+                      $query = "insert into property (Address, Neighbourhood, City, Zip_Code, Estimated_Value, Square_Footage, Num_Beds, Num_Baths, S_Email) values (?, ?, ?, ?, ?, ?, ?, ?, '$s_email')";
+                      $stmt = mysqli_prepare($conn, $query);
+                      mysqli_stmt_bind_param($stmt, "ssssiiii", $address, $neighbourhood, $city, $zip, $value, $footage, $num_beds, $num_baths);
+                      mysqli_stmt_execute($stmt);
                       // get the property id of the property that was just created in the db
                       $prop_id = mysqli_insert_id($conn);
                       // add the property id to commercial or residential property table based on selection
