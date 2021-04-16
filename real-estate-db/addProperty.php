@@ -43,35 +43,55 @@ session_start();
                         $query = "insert into residential_property (Property_ID) values ('$prop_id')";
                         mysqli_query($conn, $query);
                       }
+                      // give success response
+				              header("HTTP/1.0 200 OK");
                       // write success confirmation message
                       echo "Success! We will now upload your property details to the site for sale.";
                       //echo $prop_type . "</br>" . $address . "</br>" . $neighbourhood . "</br>" . $city . "</br>" . $zip . "</br>" . $value . "</br>" . $footage . "</br>" . $num_beds . "</br>" . $num_baths;
                     } else {
                       echo "Please enter the number of bathrooms in the property you would like to sell.";
+                      // give client error response 400 Bad Request
+		                  header("HTTP/1.0 400 Bad Request");
                     }
                   } else {
                     "Please enter the number of bedrooms in the property you would like to sell.";
+                    // give client error response 400 Bad Request
+		                header("HTTP/1.0 400 Bad Request");
                   }
                 } else {
                   echo "Please enter the square footage for the property you would like to sell.";
+                  // give client error response 400 Bad Request
+		              header("HTTP/1.0 400 Bad Request");
                 }
               } else {
                 echo "Please enter a price for the property you would like to sell.";
+                // give client error response 400 Bad Request
+		            header("HTTP/1.0 400 Bad Request");
               }
             } else {
               echo "Please enter a ZIP code for the property you would like to sell.";
+              // give client error response 400 Bad Request
+		          header("HTTP/1.0 400 Bad Request");
             }
           } else {
             echo "Please enter a city for the property you would like to sell.";
+            // give client error response 400 Bad Request
+		        header("HTTP/1.0 400 Bad Request");
           }
         } else {
           echo "Please enter a neighbourhood for the property you would like to sell.";
+          // give client error response 400 Bad Request
+		      header("HTTP/1.0 400 Bad Request");
         }
       } else {
         echo "Please enter an address for the property you would like to sell.";
+        // give client error response 400 Bad Request
+		    header("HTTP/1.0 400 Bad Request");
       }
     } else {
       echo "Please select whether the property you would like to sell is commercial or residential.";
+      // give client error response 400 Bad Request
+		  header("HTTP/1.0 400 Bad Request");
     }
   }
 ?>

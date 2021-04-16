@@ -41,11 +41,17 @@ session_start();
           mysqli_query($conn, $query);  
         }
 
+        // give success response
+				header("HTTP/1.0 200 OK");
         echo "Success!";
       } else {
+        // give client error response 400 Bad Request
+		    header("HTTP/1.0 400 Bad Request");
         echo "Please select whether or not you would like a tour.";
       }
     } else {
+      // give client error response 400 Bad Request
+		  header("HTTP/1.0 400 Bad Request");
       echo "Please choose a date.";
     }
   }
