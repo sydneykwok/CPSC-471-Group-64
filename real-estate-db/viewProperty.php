@@ -104,7 +104,7 @@
 	</style>
 </head>
 <body>
-
+  
 	<div>
 		<h2><center>Property <?php echo $prop_id ?></center></h2> 
 	</div>

@@ -92,9 +92,10 @@
           $query = "select * from property";
           $result = mysqli_query($conn, $query);
         ?>
-        
+       
         <center> <label for="proplabel">Property ID:</label> <select id = "prop" name="prop"> </center>
-          <?php 
+          
+         <?php 
           
             // check if result is good
             if ($result) {
