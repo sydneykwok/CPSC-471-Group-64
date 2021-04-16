@@ -26,11 +26,15 @@ session_start();
             
             mysqli_query($conn, $query);
 
+			// give success response
+			header("HTTP/1.0 200 OK");
             // redirect user to login page so that they can login
             header("Location: login.php");
             die;
         } else {
             echo "Please enter some valid information :)";
+			// give client error response 400 Bad Request
+			header("HTTP/1.0 400 Bad Request");
         }
     }
 

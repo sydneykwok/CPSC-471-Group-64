@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				$_SESSION['Email'] = $email;
 				// and account type
 				$_SESSION['Account_Type'] = "buyer";
+				// give success response
+				header("HTTP/1.0 200 OK");
 				// then redirect to index page
 				header("Location: index.php");
 				die;
@@ -47,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				$_SESSION['Email'] = $email;
 				// and account type
 				$_SESSION['Account_Type'] = "seller";
+				// give success response
+				header("HTTP/1.0 200 OK");
 				// then redirect to index page
 				header("Location: index.php");
 				die;
@@ -66,14 +70,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				$_SESSION['Email'] = $email;
 				// and account type
 				$_SESSION['Account_Type'] = "agent";
+				// give success response
+				header("HTTP/1.0 200 OK");
 				// then redirect to index page
 				header("Location: index.php");
 				die;
 			}
 		}
 		echo "Wrong email or password!";
+		// give client error response 401 Unauthorized: user must authenticate themself to get the requested response (index.php)
+		header("HTTP/1.0 401 Unauthorized");
 	} else {
 		echo "Please enter some valid information :(";
+		// give client error response 400 Bad Request
+		header("HTTP/1.0 400 Bad Request");
 	}
 }
 ?>
