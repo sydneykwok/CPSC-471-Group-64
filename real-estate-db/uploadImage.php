@@ -87,15 +87,15 @@
 		<h2><center>Upload Property Image</center></h2> 
 	</div>
     <form action="" method="POST" enctype="multipart/form-data">
-        <label for="proplabel">Property ID:</label>
         <?php 
           // get all properties
           $query = "select * from property";
           $result = mysqli_query($conn, $query);
         ?>
-        
-        <select id = "prop" name="prop">
-          <?php 
+       
+        <center> <label for="proplabel">Property ID:</label> <select id = "prop" name="prop"> </center>
+          
+         <?php 
           
             // check if result is good
             if ($result) {

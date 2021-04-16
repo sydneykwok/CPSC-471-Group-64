@@ -63,9 +63,10 @@
 	<form method="post">
 		<div>
 			<h2><center>Search many listings from trusted real estate agents.</center></h2> 
-			<br>
 		</div>
-
+		
+		<center>
+		
 		<div>
 			<label>Select a property type:</label>
 			<select name="property">
@@ -202,8 +203,10 @@
 			<input type="submit" name="submit" value="Search">
 		</div>
 
+		</center>
+
 		</form>
-		<br>
+		<br><br>
 	</div>
 	<form method="post" action="">
 <?php

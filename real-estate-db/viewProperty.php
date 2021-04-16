@@ -7,6 +7,15 @@
     $user_data = check_login($conn);	
 
     $prop_id = $_SESSION['Property_ID'];
+?>
+
+<body>
+   <div class="grad">
+		<h1 class="logo"> Logo </h1>
+	</div>
+</body>
+
+<?php
 
     // get property info
     $query = "SELECT * FROM property WHERE Property_ID = '$prop_id' limit 1";
@@ -95,9 +104,7 @@
 	</style>
 </head>
 <body>
-    <div class="grad">
-		<h1 class="logo"> Logo </h1>
-	</div>
+  
 	<div>
 		<h2><center>Property <?php echo $prop_id ?></center></h2> 
 	</div>
@@ -137,10 +144,14 @@
 
 	if (mysqli_num_rows($images) > 0) {
 	?>
+
+	<center>
 		<div class="gallery"> 
 			<?php while($row = mysqli_fetch_assoc($images)) { ?> 
 				<img src="images/<?php echo $row['Image_ID']; ?>.jfif" /> <br><br>
 			<?php } ?> 
 		</div> 
+	</center>
+
 	<?php } 
 ?>
