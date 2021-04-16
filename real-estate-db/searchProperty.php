@@ -283,8 +283,11 @@
 
 	//1. User chooses residential, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
 	if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -330,8 +333,11 @@
 
 	//2. User chooses residential, sets city, sets max price, sets # of bedrooms, does not set # of bathrooms	
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -377,8 +383,11 @@
 
 	//3. User chooses residential, sets city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -424,8 +433,11 @@
 
 	//4. User chooses residential, sets city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -472,8 +484,11 @@
 
 	//5. User chooses residential, sets city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -519,8 +534,11 @@
 
 	//6. User chooses residential, sets city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -566,8 +584,11 @@
 
 	//7. User chooses residential, sets city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -613,8 +634,11 @@
 
 	//8. User chooses residential, sets city, does not set max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -1039,8 +1063,11 @@
 
 	//1. User chooses commercial, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1087,8 +1114,11 @@
 	
 	//2. User chooses commercial, sets city, sets max price, sets # of bedrooms, does not set # of bathrooms	
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1135,8 +1165,11 @@
 	
 	//3. User chooses commercial, sets city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1182,8 +1215,11 @@
 	
 	//4. User chooses commercial, sets city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1229,8 +1265,11 @@
 	
 	//5. User chooses commercial, sets city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1276,8 +1315,11 @@
 	
 	//6. User chooses commercial, sets city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1323,8 +1365,11 @@
 	
 	//7. User chooses commercial, sets city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1370,8 +1415,11 @@
 	
 	//8. User chooses commercial, sets city, does not set max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>

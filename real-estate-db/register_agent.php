@@ -19,9 +19,10 @@ session_start();
 		// can add other validity checks for inputs here if we want
         if (!empty($first_name) && !empty($last_name) && !empty($contact_no) && !empty($email) && !empty($password) && !empty($association)) {
             // if all good, save to database (via query)
-			$query = "insert into real_estate_agent (First_Name,Last_Name,Contact_No,Email,Password,Association) values ('$first_name', '$last_name', '$contact_no', '$email', '$password', '$association')";
-            
-            mysqli_query($conn, $query);
+			$query = "insert into real_estate_agent (First_Name,Last_Name,Contact_No,Email,Password,Association) values (?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+			mysqli_stmt_bind_param($stmt, "ssssss", $first_name, $last_name, $contact_no, $email, $password, $association);
+			mysqli_stmt_execute($stmt);
 
 			// give success response
 			header("HTTP/1.0 200 OK");
@@ -39,6 +40,7 @@ session_start();
 
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 	<title>Agent Registration</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -66,11 +68,11 @@ session_start();
 			</p>
             <p>
 				<label>Phone Number:</label> 
-				<input id="text" type="password" name="contact_no"/>
+				<input id="text" type="text" name="contact_no"/>
 			</p>
             <p>
 				<label>Association:</label> 
-				<input id="text" type="password" name="association"/>
+				<input id="text" type="text" name="association"/>
 			</p>
 			
 			<input id="button" type="submit" value="Register"><br><br>

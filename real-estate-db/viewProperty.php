@@ -103,10 +103,12 @@
 	</div>
 
     <form method="post" action="">
+	<center>
     <?php
         if ($_SESSION['Account_Type']=="buyer") { ?>
             <input type="submit" name="bookmark" value="Bookmark This Property">        
         <?php } ?>
+	</center>
     </form>
 
     <h2><center>Could this your new home?</center></h2>

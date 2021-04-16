@@ -4,7 +4,7 @@
     include("connection.php");	// for use of $conn
     include("functions.php");	// for use of check_login()
 
-    $user_data = check_login($conn);	
+    //$user_data = check_login($conn);	
 
     // if user presses Sell button...
     if (isset($_POST['sell'])) {
