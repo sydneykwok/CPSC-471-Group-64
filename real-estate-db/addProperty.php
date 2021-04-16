@@ -1,81 +1,102 @@
 <?php
 // on every page where you want to use the session (check if user is logged in), have to put session_start().
 session_start();
+  // include the files we need
+  include("connection.php");	// for use of $conn
+  include("functions.php");	// for use of check_login()
 
-    // include the files we need
-    include("connection.php");	// for use of $conn
-    include("functions.php");	// for use of check_login()
+  // collect user data in user_data variable
+  $user_data = check_login($conn);	
 
-    // collect user data in user_data variable
-    // check_login() is a function defined in functions.php that takes connection to database in $conn variable
-    $user_data = check_login($conn);	
-	// if user is not logged in, they will be redirected to login page
-	// if they are logged in, this user_data will contain their info. to access an attribute of the user: $user_data['attribute']
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    //property: Property_ID, Address, Neighbourhood, City, Zip_Code, Estimated_Value, Square_Footage, Num_Beds, Num_Baths, S_Email
+    $prop_type = $_POST['prop_type'];
+    $address = $_POST['address'];
+    $neighbourhood = $_POST['neighbourhood'];
+    $city = $_POST['city'];
+    $zip = $_POST['zip'];
+    $value = $_POST['value'];
+    $footage = $_POST['footage'];
+    $num_beds = $_POST['bed'];
+    $num_baths = $_POST['bath'];
+    $s_email = $user_data['Email'];
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        // something was posted, so collect the data from the post variable
-        $property = $_POST['property'];
-        $address = $_POST['address'];
-        $neighbourhood = $_POST['neighbourhood'];
-        $city = $_POST['city'];
-        $zip = $_POST['zip'];
-        $status = $_POST['status'];
-        $value = $_POST['value'];
-        $footage = $_POST['footage'];
-        $b_email = $_POST['bEmail'];
-        $s_email = $user_data['Email'];
-        $agent = $_POST['agent'];
-
-        if (!empty($property)) {
-            if (!empty($address)) {
-                if (!empty($neighbourhood)) {
-                    if (!empty($city)) {
-                        if (!empty($zip)) {
-                            if (!empty($status)) {
-                                if (!empty($value)) {
-                                    if (!empty($footage)) {
-                                        if (!empty($b_email)) {
-                                            // add the property details to the property relation 
-                                            $query = "insert into property (Property_ID, Address, Neighbourhood, City, Zip_Code, Status, Estimated_Value, Square_Footage, B_Email, S_Email, Agent_ID) values ('$property', '$address', '$neighbourhood', '$city', '$zip', '$status', '$value', '$footage', '$b_email', '$s_email', '$agent')";
-                                            mysqli_query($conn, $query);
-                                            // write success confirmation message after inserting data into table for property 
-                                            echo "Success! We will now upload your property details to the site for sale.";
-                                        }
-                                        else {
-                                            echo "Please enter the temporary buyer email for the property you would like to sell.";
-                                        }
-                                    }
-                                    else {
-                                         echo "Please enter the square footage for the property you would like to sell.";
-                                    }
-                                }
-                                else {
-                                    echo "Please enter a price for the property you would like to sell.";
-                                }
-                            }
-                            else {
-                                echo "Please enter a purchase status for the property you would like to sell.";
-                            }
-                        } else {
-                            echo "Please enter a ZIP code for the property you would like to sell.";
-                        }
+    if (!empty($prop_type)) {
+      if (!empty($address)) {
+        if (!empty($neighbourhood)) {
+          if (!empty($city)) {
+            if (!empty($zip)) {
+              if (!empty($value)) {
+                if (!empty($footage)) {
+                  if (!empty($num_beds)) {
+                    if (!empty($num_baths)) {
+                      // add the property details to the property relation 
+                      //$query = "insert into property (Address, Neighbourhood, City, Zip_Code, Estimated_Value, Square_Footage, Num_Beds, Num_Baths, S_Email) values ('$address', '$neighbourhood', '$city', '$zip', '$value', '$footage', '$num_beds', '$num_baths', '$s_email')";
+                      $query = "insert into property (Address, Neighbourhood, City, Zip_Code, Estimated_Value, Square_Footage, Num_Beds, Num_Baths, S_Email) values (?, ?, ?, ?, ?, ?, ?, ?, '$s_email')";
+                      $stmt = mysqli_prepare($conn, $query);
+                      mysqli_stmt_bind_param($stmt, "ssssiiii", $address, $neighbourhood, $city, $zip, $value, $footage, $num_beds, $num_baths);
+                      mysqli_stmt_execute($stmt);
+                      // get the property id of the property that was just created in the db
+                      $prop_id = mysqli_insert_id($conn);
+                      // add the property id to commercial or residential property table based on selection
+                      if ($prop_type=="com") {
+                        $query = "insert into commercial_property (Property_ID) values ('$prop_id')";
+                        mysqli_query($conn, $query);
+                      } else {
+                        $query = "insert into residential_property (Property_ID) values ('$prop_id')";
+                        mysqli_query($conn, $query);
+                      }
+                      // give success response
+				              header("HTTP/1.0 200 OK");
+                      // write success confirmation message
+                      echo "Success! We will now upload your property details to the site for sale.";
+                      //echo $prop_type . "</br>" . $address . "</br>" . $neighbourhood . "</br>" . $city . "</br>" . $zip . "</br>" . $value . "</br>" . $footage . "</br>" . $num_beds . "</br>" . $num_baths;
+                    } else {
+                      echo "Please enter the number of bathrooms in the property you would like to sell.";
+                      // give client error response 400 Bad Request
+		                  header("HTTP/1.0 400 Bad Request");
                     }
-                    else {
-                        echo "Please enter a city for the property you would like to sell.";
-                    }
+                  } else {
+                    "Please enter the number of bedrooms in the property you would like to sell.";
+                    // give client error response 400 Bad Request
+		                header("HTTP/1.0 400 Bad Request");
+                  }
+                } else {
+                  echo "Please enter the square footage for the property you would like to sell.";
+                  // give client error response 400 Bad Request
+		              header("HTTP/1.0 400 Bad Request");
                 }
-                else {
-                    echo "Please enter a neighbourhood for the property you would like to sell.";
-                }
+              } else {
+                echo "Please enter a price for the property you would like to sell.";
+                // give client error response 400 Bad Request
+		            header("HTTP/1.0 400 Bad Request");
+              }
+            } else {
+              echo "Please enter a ZIP code for the property you would like to sell.";
+              // give client error response 400 Bad Request
+		          header("HTTP/1.0 400 Bad Request");
             }
-            else {
-                echo "Please enter an address for the property you would like to sell.";
-            }
+          } else {
+            echo "Please enter a city for the property you would like to sell.";
+            // give client error response 400 Bad Request
+		        header("HTTP/1.0 400 Bad Request");
+          }
+        } else {
+          echo "Please enter a neighbourhood for the property you would like to sell.";
+          // give client error response 400 Bad Request
+		      header("HTTP/1.0 400 Bad Request");
         }
-        else {
-            echo "Please enter a property ID for the property you would like to sell.";
-        }
+      } else {
+        echo "Please enter an address for the property you would like to sell.";
+        // give client error response 400 Bad Request
+		    header("HTTP/1.0 400 Bad Request");
+      }
+    } else {
+      echo "Please select whether the property you would like to sell is commercial or residential.";
+      // give client error response 400 Bad Request
+		  header("HTTP/1.0 400 Bad Request");
     }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -158,8 +179,10 @@ input[type=submit]:hover {
     </div>
     <div class="column">
       <form method="post">
-        <label for="addr">Property ID:</label>
-        <input type="text" id="prop" name="property" placeholder="The ID of the property..."></br></br>
+        <label for="prop_type">Property Type:</label> 
+				<input id="radbtn" type="radio" name="prop_type" value="res"/>Residential
+				<input id="radbtn" type="radio" name="prop_type" value="com"/>Commercial
+        </br></br>
 
         <label for="addr">Address:</label>
         <input type="text" id="addr" name="address" placeholder="The address of the property..."></br></br>
@@ -173,29 +196,17 @@ input[type=submit]:hover {
         <label for="zip">Zip Code:</label>
         <input type="text" id="zip" name="zip" placeholder="The ZIP code of the property..."></br></br>
 
-        <label for="stat">Status:</label>
-        <input type="text" id="stat" name="status" placeholder="Enter a 1 to indicate the status is not bought..."></br></br>
-
         <label for="val">Estimated Value:</label>
         <input type="text" id="val" name="value" placeholder="The estimated value of the property..."></br></br>
 
         <label for="sqfoot">Square Footage:</label>
         <input type="text" id="sqfoot" name="footage" placeholder="The square footage of the property..."></br></br>
 
-        <label for="bEmail">Buyer Email:</label>
-        <input type="text" id="bEmail" name="bEmail" placeholder="Enter a temporary buyer email or word (ie. test)..."></br></br>
+        <label for="bed">Number of Bedrooms:</label>
+        <input type="text" id="beds" name="bed" placeholder="The number of bedrooms in the property..."></br></br>
 
-        <label for="agentlabel">Agent (ID):</label>
-        <?php 
-          // for each agent in the real_estate_agent table, add their id as an option
-          $query = "select Agent_ID from real_estate_agent";
-          $result = mysqli_query($conn, $query);
-        ?>
-        <select id = "agent" name="agent">
-          <?php while($option = mysqli_fetch_assoc($result)){ ?>
-            <option value="<?php echo $option['Agent_ID']; ?>"><?php echo $option['Agent_ID']; ?></option>
-          <?php } ?>
-        </select>
+        <label for="bath">Number of Bathrooms:</label>
+        <input type="text" id="baths" name="bath" placeholder="The number of bathrooms in the property..."></br></br>
 
         <input type="submit" value="Submit">
       </form>

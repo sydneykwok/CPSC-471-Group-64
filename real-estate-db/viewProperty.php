@@ -7,25 +7,30 @@
     $user_data = check_login($conn);	
 
     $prop_id = $_SESSION['Property_ID'];
+?>
+
+<body>
+   <div class="grad">
+		<h1 class="logo"> Logo </h1>
+	</div>
+</body>
+
+<?php
 
     // get property info
     $query = "SELECT * FROM property WHERE Property_ID = '$prop_id' limit 1";
     $result = mysqli_query($conn, $query);
     if ($result && mysqli_num_rows($result)>0) {
-        $prop_data = mysqli_fetch_assoc($result);
-        if ($_SESSION['Property_Type'] == "com") {
+		$prop_data = mysqli_fetch_assoc($result);
+		if ($_SESSION['Property_Type'] == "com") {
             echo "Property Type: Commercial</br>";
-        } else {
+        } 
+		else {
             echo "Property Type: Residential</br>";
         }
-        echo "Property ID: " . $prop_data['Property_ID'] . "</br>";
-        echo "Address: " . $prop_data['Address'] . "</br>";
-        echo "Neighbourhood: " . $prop_data['Neighbourhood'] . "</br>";
-        echo "City: " . $prop_data['City'] . "</br>";
-        echo "Zip Code: " . $prop_data['Zip_Code'] . "</br>";
-        echo "Estimated Value: " . $prop_data['Estimated_Value'] . "</br>";
-        echo "Square Footage: " . $prop_data['Square_Footage'] . "</br>";
-    } else {
+		echo "More details on the selected property was successfully retrieved!";	
+    } 
+	else {
         echo "There was an error retrieving the property info.";
     }
 
@@ -71,29 +76,65 @@
 			padding-left: 50px;
 		}
 
-        .meeting_div{
-            float: left;
-		    width: 100%;
-            border: 1px solid;
-		    padding: 20px 20px;
-            text-align: center;
-        }
+		.meeting_div{
+			float: left;
+			width: 100%;
+			border: 1px solid;
+			padding: 20px 20px;
+			text-align: center;
+		}
+
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			transition: 0.3s;
+			width: 50%;
+			text-align: center;
+			margin: 0 auto;
+			float: none;
+			margin-bottom: 10px;
+		}
+
+		.card:hover {
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		}
+
+		.container {
+			padding: 2px 16px;
+		}
 	</style>
 </head>
 <body>
-    <div class="grad">
-		<h1 class="logo"> Logo </h1>
-	</div>
-    <div>
+
+	<div>
 		<h2><center>Property <?php echo $prop_id ?></center></h2> 
 	</div>
 
     <form method="post" action="">
+	<center>
     <?php
         if ($_SESSION['Account_Type']=="buyer") { ?>
             <input type="submit" name="bookmark" value="Bookmark This Property">        
         <?php } ?>
+	</center>
     </form>
+
+    <h2><center>Could this your new home?</center></h2>
+
+	<h2><center>View The Property Details To Find Out!</center></h2>
+
+	<div class="card">
+		<img src="images/house_keys.jpg" style="width:100%">
+		<div class="container">
+			<h4><b>Property ID: <?php echo $prop_data['Property_ID'] ?></b></h4>
+			<p>Address: <?php echo $prop_data['Address'] ?></p> 
+			<p>Neighbourhood: <?php echo $prop_data['Neighbourhood'] ?></p>
+			<p>City: <?php echo $prop_data['City'] ?></p>
+			<p>Zip Code: <?php echo $prop_data['Zip_Code'] ?></p>
+			<p>Estimated Value: <?php echo $prop_data['Estimated_Value'] ?></p>
+			<p>Square Footage: <?php echo $prop_data['Square_Footage'] ?></p>
+		</div>
+	</div>
+
 </body>
 </html>
 
@@ -103,10 +144,14 @@
 
 	if (mysqli_num_rows($images) > 0) {
 	?>
+
+	<center>
 		<div class="gallery"> 
 			<?php while($row = mysqli_fetch_assoc($images)) { ?> 
 				<img src="images/<?php echo $row['Image_ID']; ?>.jfif" /> <br><br>
 			<?php } ?> 
 		</div> 
+	</center>
+
 	<?php } 
 ?>

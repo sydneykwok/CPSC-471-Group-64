@@ -63,9 +63,10 @@
 	<form method="post">
 		<div>
 			<h2><center>Search many listings from trusted real estate agents.</center></h2> 
-			<br>
 		</div>
-
+		
+		<center>
+		
 		<div>
 			<label>Select a property type:</label>
 			<select name="property">
@@ -202,8 +203,10 @@
 			<input type="submit" name="submit" value="Search">
 		</div>
 
+		</center>
+
 		</form>
-		<br>
+		<br><br>
 	</div>
 	<form method="post" action="">
 <?php
@@ -283,8 +286,11 @@
 
 	//1. User chooses residential, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
 	if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -298,7 +304,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -319,8 +336,11 @@
 
 	//2. User chooses residential, sets city, sets max price, sets # of bedrooms, does not set # of bathrooms	
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -334,7 +354,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -355,8 +386,11 @@
 
 	//3. User chooses residential, sets city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -370,7 +404,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -391,8 +436,11 @@
 
 	//4. User chooses residential, sets city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -407,7 +455,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -428,8 +487,11 @@
 
 	//5. User chooses residential, sets city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -443,7 +505,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -464,8 +537,11 @@
 
 	//6. User chooses residential, sets city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -479,7 +555,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -500,8 +587,11 @@
 
 	//7. User chooses residential, sets city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -515,7 +605,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -536,8 +637,11 @@
 
 	//8. User chooses residential, sets city, does not set max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($res_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price')";
-		$res_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `residential_property` AS r NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$res_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($res_filtered) > 0) {
 		?>
@@ -551,7 +655,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -587,7 +702,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -623,7 +749,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -659,7 +796,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -695,7 +843,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -731,7 +890,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -767,7 +937,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -803,7 +984,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -839,7 +1031,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/house.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -863,8 +1066,11 @@
 
 	//1. User chooses commercial, sets city, sets max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -878,7 +1084,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -900,8 +1117,11 @@
 	
 	//2. User chooses commercial, sets city, sets max price, sets # of bedrooms, does not set # of bathrooms	
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -915,7 +1135,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -937,8 +1168,11 @@
 	
 	//3. User chooses commercial, sets city, sets max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -952,7 +1186,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -973,8 +1218,11 @@
 	
 	//4. User chooses commercial, sets city, sets max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == True && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Estimated_Value <= '$max_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -988,7 +1236,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1009,8 +1268,11 @@
 	
 	//5. User chooses commercial, sets city, does not set max price, sets # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1024,7 +1286,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1045,8 +1318,11 @@
 	
 	//6. User chooses commercial, sets city, does not set max price, sets # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == True && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Beds = '$beds')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1060,7 +1336,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1081,8 +1368,11 @@
 	
 	//7. User chooses commercial, sets city, does not set max price, does not set # of bedrooms, sets # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == True) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price' and p.Num_Baths = '$baths')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1096,7 +1386,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1117,8 +1418,11 @@
 	
 	//8. User chooses commercial, sets city, does not set max price, does not set # of bedrooms, does not set # of bathrooms
 	else if ($com_Flag == True && $city_Flag == True && $max_price_Flag == False && $beds_Flag == False && $baths_Flag == False) {
-		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = '$city' and p.Estimated_Value >= '$min_price')";
-		$com_filtered = mysqli_query($conn, $query);
+		$query = "(SELECT * FROM `commercial_property` AS c NATURAL JOIN `property` AS p WHERE p.City = ? and p.Estimated_Value >= '$min_price')";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $city);
+		mysqli_stmt_execute($stmt);
+		$com_filtered = mysqli_stmt_get_result($stmt);
 
 		if (mysqli_num_rows($com_filtered) > 0) {
 		?>
@@ -1132,7 +1436,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+				<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1168,7 +1483,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1204,7 +1530,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1240,7 +1577,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1276,7 +1624,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1313,7 +1672,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1349,7 +1719,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1385,7 +1766,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>
@@ -1421,7 +1813,18 @@
 		?>
 			<div class ="column">
 				<div class="card">
-					<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php
+					$prop_id = $row['Property_ID'];
+					$img_query = "(SELECT * FROM `property_image` WHERE Property_ID =  '$prop_id')";
+					$image = mysqli_query($conn, $img_query);
+
+					if ($image && mysqli_num_rows($image) > 0) {
+						$img_data = mysqli_fetch_assoc($image); ?>
+						<img src="images/<?php echo $img_data['Image_ID']; ?>.jfif" alt="House" style="width:100%">
+					<?php } else { ?>
+						<img src="images/commercial.jpg" alt="House" style="width:100%">
+					<?php 
+					} ?>
 					<h2> <?php echo $row['Address'];?> </h2>
 					<p class="price"> <?php echo "$" . $row['Estimated_Value'];?> </p>
 					<h3> <?php echo "Bedrooms: " . $row['Num_Beds'] . " Bathrooms: " . $row['Num_Baths'];?> </h3>

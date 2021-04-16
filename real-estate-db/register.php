@@ -19,18 +19,23 @@ session_start();
         if (!empty($account_type) && !empty($email) && !is_numeric($email) && !empty($first_name) && !empty($last_name) && !empty($password)) {
             // if all good, save to database (via query)
 			if ($account_type == "b") {
-				$query = "insert into buyer (Email,First_Name,Last_Name,Password) values ('$email', '$first_name', '$last_name', '$password')";
-			} else if ($account_type == "s") {
-				$query = "insert into seller (Email,First_Name,Last_Name,Password) values ('$email', '$first_name', '$last_name', '$password')";
+				$query = "insert into buyer (Email,First_Name,Last_Name,Password) values (?, ?, ?, ?)";
+			} else {
+				$query = "insert into seller (Email,First_Name,Last_Name,Password) values (?, ?, ?, ?)";
 			}
-            
-            mysqli_query($conn, $query);
+			$stmt = mysqli_prepare($conn, $query);
+			mysqli_stmt_bind_param($stmt, "ssss", $email, $first_name, $last_name, $password);
+			mysqli_stmt_execute($stmt);
 
+			// give success response
+			header("HTTP/1.0 200 OK");
             // redirect user to login page so that they can login
             header("Location: login.php");
             die;
         } else {
             echo "Please enter some valid information :)";
+			// give client error response 400 Bad Request
+			header("HTTP/1.0 400 Bad Request");
         }
     }
 
@@ -38,6 +43,7 @@ session_start();
 
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 	<title>User Registration</title>
 	<link rel="stylesheet" type="text/css" href="style.css">

@@ -95,38 +95,39 @@ session_start();
 
 	</div>
 
-	<h1>Welcome to the Real Estates Home Page!</h1>
+	<h1><center>Welcome to the Real Estates Home Page!</center></h1>
 
 	<br>
-	Hello, <?php echo $_SESSION['Account_Type'] . " " . $user_data['First_Name'];?>.
+	<center> Hello, <?php echo $_SESSION['Account_Type'] . " " . $user_data['First_Name'];?>. </center>
 	
 	<br>
-	Our business hours are 9am-7pm for 7 days a week.
+	<center>Our business hours are 9am-7pm for 7 days a week.
 	
-	Select one of the following options to begin your property search.
+	 Select one of the following options to begin your property search. </center> <br>
 
 	<!-- Create a list of options to go to on the Home Page-->
 	<div>
-		<a href="searchProperty.php">Click to Search for Properties</a><br><br>
+		<center><a href="searchProperty.php">Click to Search for Properties</a></center> <br><br>
 		<?php
 			// depending on account type, get the options for the home page
 			// if buyer account, allow booking for a meeting 
 			if ($_SESSION['Account_Type']=="buyer") { ?>
-				<a href="bookMeeting.php">Click to Book a Meeting With a Real Estate Agent</a><br><br>
+				<center> <a href="bookMeeting.php">Click to Book a Meeting With a Real Estate Agent</a> </center> <br><br>
+				<center> <a href="bookmarks.php">Click to View The Properties You've Bookmarked</a> </center> <br><br>
 			<?php }
 			// if buyer or agent account, allow for view meeting 
 			if ($_SESSION['Account_Type']=="buyer" || $_SESSION['Account_Type']=="agent") { ?>
-				<a href="viewMeetings.php">Click to View Your Meetings</a><br><br>
-				<a href="bookmarks.php">Click to View The Properties You've Bookmarked</a><br><br>
+				<center> <a href="viewMeetings.php">Click to View Your Meetings</a> </center> <br><br>
 			<?php }
 			// if seller account, allow for selling of property 
 			if ($_SESSION['Account_Type']=="seller") { ?>
-				<a href="addProperty.php">Click to Sell a Property</a><br><br>
-				<a href="viewSellerListings.php">Click to View Your Listings</a><br><br>
+				<center> <a href="addProperty.php">Click to Sell a Property</a> </center> <br><br>
+				<center> <a href="viewSellerListings.php">Click to View Your Listings</a> </center> <br><br>
 			<?php } 
 			// if agent account, allow marking properties as sold (property has been bought) 
 			if ($_SESSION['Account_Type']=="agent") { ?>
-				<a href="sellProperty.php">Click to Mark Properties As Sold</a><br><br>
+				<center> <a href="sellProperty.php">Click to Mark Properties As Sold</a> </center> <br><br>
+				<center> <a href="uploadImage.php">Click to Upload Property Image</a> </center> <br><br>
 			<?php } ?>
 	</div>
 </body>
